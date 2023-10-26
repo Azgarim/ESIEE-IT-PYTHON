@@ -41,7 +41,7 @@ def evaluer_force(entropie):
         return "fort"
 
 
-def tester_mdp(mdp):
+def evaluer_mdp(mdp):
     #Teste la force du mot de passe
     entropie = calculer_entropie(mdp)
     force = evaluer_force(entropie)

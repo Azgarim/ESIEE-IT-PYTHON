@@ -1,5 +1,3 @@
-# generateur_mdp.py
-
 import random
 
 
