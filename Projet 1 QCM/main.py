@@ -114,9 +114,9 @@ for q in questions:
             f"La question '{q.intitule}' a {len(bonnes_reponses)} bonnes réponses. Il devrait y en avoir exactement une.")
 
 # Mélange aléatoire de la liste des questions
-random.shuffle(questions2)
+#random.shuffle(questions2)
 questions_melangees = random.sample(questions, 10)
 
 # Création du quiz et démarrage du quiz
-quiz = Quiz(questions2[:10])
+quiz = Quiz(questions_melangees)
 quiz.commencer()

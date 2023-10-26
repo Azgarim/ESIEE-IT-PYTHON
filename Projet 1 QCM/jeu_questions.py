@@ -45,7 +45,7 @@ def jeu_predefini():
         ]),
         Question("De quel jeu vidéo provient le personnage de Mario ?", [
             Reponse("Tetris"),
-            Reponse("Sonic"),
+            Reponse("Sonic", est_correcte=True),
             Reponse("Super Mario", est_correcte=True)
         ]),
         Question("Quelle est la couleur obtenue en mélangeant du bleu et du jaune ?", [
