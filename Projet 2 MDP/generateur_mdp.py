@@ -1,35 +1,39 @@
 import random
 
+class GenerateurMDP:
+    # Constructeur de la classe, initialisé avec le nombre de différents types de caractères souhaités pour le mot de passe
+    def __init__(self, minuscules=0, majuscules=0, chiffres=0, speciaux=0):
+        self.minuscules = minuscules  # Nombre de caractères minuscules désiré
+        self.majuscules = majuscules  # Nombre de caractères majuscules désiré
+        self.chiffres = chiffres      # Nombre de chiffres désirés
+        self.speciaux = speciaux      # Nombre de caractères spéciaux désirés
 
-def generer_mdp(nb_minuscules, nb_majuscules, nb_chiffres, nb_caracteres_speciaux):
-    #Génère un mot de passe basé sur les critères fournis
+    def generer(self):
+        # Définition des différents types de caractères
+        min_chars = 'abcdefghijklmnopqrstuvwxyz'
+        maj_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        num_chars = '0123456789'
+        special_chars = '!@#$%^&*()-_=+[]{}|;:,.<>?/\\'
 
-    minuscules = 'abcdefghijklmnopqrstuvwxyz'
-    majuscules = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    chiffres = '0123456789'
-    caracteres_speciaux = '!@#$%^&*()-_=+[]{}|;:,.<>?/\\'
+        mdp = ""  # Initialise la chaîne du mot de passe à vide
 
-    mdp = ""
+        # Ajout des caractères minuscules au mot de passe
+        for i in range(self.minuscules):
+            mdp += random.choice(min_chars)
 
-    # Ajouter les minuscules
-    for i in range(nb_minuscules):
-        mdp += random.choice(minuscules)
+        # Ajout des caractères majuscules au mot de passe
+        for i in range(self.majuscules):
+            mdp += random.choice(maj_chars)
 
-    # Ajouter les majuscules
-    for i in range(nb_majuscules):
-        mdp += random.choice(majuscules)
+        # Ajout des chiffres au mot de passe
+        for i in range(self.chiffres):
+            mdp += random.choice(num_chars)
 
-    # Ajouter les chiffres
-    for i in range(nb_chiffres):
-        mdp += random.choice(chiffres)
+        # Ajout des caractères spéciaux au mot de passe
+        for i in range(self.speciaux):
+            mdp += random.choice(special_chars)
 
-    # Ajouter les caractères spéciaux
-    for i in range(nb_caracteres_speciaux):
-        mdp += random.choice(caracteres_speciaux)
-
-    # Mélanger le mot de passe pour plus de sécurité
-    mdp_list = list(mdp)
-    random.shuffle(mdp_list)
-    mdp = ''.join(mdp_list)
-
-    return mdp
+        # Conversion du mot de passe en liste, mélange des caractères pour plus de sécurité
+        mdp_list = list(mdp)
+        random.shuffle(mdp_list)
+        return ''.join(mdp_list)  # Convertit la liste mélangée en chaîne et la retourne

@@ -1,33 +1,33 @@
 import random
 
+class GenerateurPhrase:
+    # Constructeur de la classe, initialisé avec le nombre de mots souhaité pour la phrase secrète
+    def __init__(self, n_mots=6):
+        self.n_mots = n_mots
 
-def lancer_des():
-    #Simule le lancer de 5 dés pour obtenir un indice
-    resultat = ""
-    for _ in range(5):
-        resultat += str(random.randint(1, 6))
-    return resultat
+    # Méthode pour simuler le lancement de 5 dés, renvoie une chaîne de 5 chiffres
+    def lancer_des(self):
+        resultat = ""
+        for _ in range(5):
+            resultat += str(random.randint(1, 6))
+        return resultat
 
+    # Méthode pour chercher un mot dans le fichier "eff_large_wordlist.txt" basé sur un indice donné
+    def chercher_mot(self, indice):
+        # Ouverture du fichier en mode lecture
+        with open("eff_large_wordlist.txt", "r") as f:
+            # Parcourt chaque ligne du fichier
+            for line in f:
+                # Si une ligne commence par l'indice donné, retourne le mot associé
+                if line.startswith(indice):
+                    return line.split()[1]
 
-def chercher_mot(indice):
-    #Cherche un mot dans la liste EFF basé sur l'indice fourni.
-    f = open("eff_large_wordlist.txt", "r")
-    lines = f.readlines()
-    for line in lines:
-        if line.startswith(indice):
-            mot = line.split()[1] #Utilise le deuxième mot de la ligne c'est à dire le mot que l'on cherche
-            f.close()
-            return mot
-    f.close()
-
-def generer_phrase():
-    #Génère une passphrase à partir de 6 mots
-    phrase = ""
-    for i in range(6):
-        indice = lancer_des()
-        mot = chercher_mot(indice)
-        phrase += mot
-        if i < 5:
-            phrase += "-"
-    # [1:] #Supprime le dernier caractère et le premier qui se fait déplacer depuis la dernière position
-    return phrase.strip()
+    # Méthode principale pour générer une phrase secrète
+    def generer(self):
+        phrase = ""
+        # Génération des mots pour la phrase
+        for i in range(self.n_mots):
+            indice = self.lancer_des()       # Obtention de l'indice via le lancement des dés
+            mot = self.chercher_mot(indice)  # Recherche du mot correspondant à l'indice
+            phrase += mot + '-'              # Ajout du mot à la phrase avec un séparateur '-'
+        return phrase[:-1]  # Retour de la phrase sans le dernier séparateur '-'

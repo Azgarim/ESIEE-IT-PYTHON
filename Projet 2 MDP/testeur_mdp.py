@@ -1,49 +1,50 @@
 import math
 
 
-def calculer_entropie(mdp):
-    #Calcule l'entropie du mot de passe basé sur son alphabet
+class TesteurMDP:
+    # Constructeur de la classe, initialisé avec un mot de passe donné
+    def __init__(self, mdp=""):
+        self.mdp = mdp
 
-    longueur = len(mdp)
+    # Méthode pour calculer l'entropie du mot de passe
+    def calculer_entropie(self):
+        longueur = len(self.mdp)
 
-    # Définir les alphabets
-    minuscules = 'abcdefghijklmnopqrstuvwxyz'
-    majuscules = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    chiffres = '0123456789'
-    caracteres_speciaux = '!@#$%^&*()-_=+[]{}|;:,.<>?/\\'
+        # Définition des différents ensembles de caractères
+        min_chars = 'abcdefghijklmnopqrstuvwxyz'
+        maj_chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        num_chars = '0123456789'
+        special_chars = '!@#$%^&*()-_=+[]{}|;:,.<>?/\\'
 
-    # Déterminer l'alphabet utilisé
-    taille_alphabet = 0
-    if any(c in minuscules for c in mdp):
-        taille_alphabet += len(minuscules)
-    if any(c in majuscules for c in mdp):
-        taille_alphabet += len(majuscules)
-    if any(c in chiffres for c in mdp):
-        taille_alphabet += len(chiffres)
-    if any(c in caracteres_speciaux for c in mdp):
-        taille_alphabet += len(caracteres_speciaux)
+        # Calcul de la taille de l'alphabet utilisé dans le mot de passe
+        taille_alphabet = 0
+        if any(c in min_chars for c in self.mdp):
+            taille_alphabet += len(min_chars)
+        if any(c in maj_chars for c in self.mdp):
+            taille_alphabet += len(maj_chars)
+        if any(c in num_chars for c in self.mdp):
+            taille_alphabet += len(num_chars)
+        if any(c in special_chars for c in self.mdp):
+            taille_alphabet += len(special_chars)
 
-    # Calculer l'entropie
-    entropie = longueur * math.log2(taille_alphabet)
+        # Calcul de l'entropie en se basant sur la formule de l'entropie
+        return longueur * math.log2(taille_alphabet)
 
-    return entropie
+    # Méthode pour évaluer la force du mot de passe en fonction de son entropie
+    def evaluer_force(self):
+        entropie = self.calculer_entropie()
+        # Catégorisation de l'entropie
+        if entropie < 64:
+            return "très faible"
+        elif 64 <= entropie < 80:
+            return "faible"
+        elif 80 <= entropie < 100:
+            return "moyen"
+        else:
+            return "fort"
 
-
-def evaluer_force(entropie):
-    #Évalue la force du mot de passe basée sur son entropie
-    if entropie < 64:
-        return "très faible"
-    elif 64 <= entropie < 80:
-        return "faible"
-    elif 80 <= entropie < 100:
-        return "moyen"
-    else:
-        return "fort"
-
-
-def evaluer_mdp(mdp):
-    #Teste la force du mot de passe
-    entropie = calculer_entropie(mdp)
-    force = evaluer_force(entropie)
-
-    return entropie, force
+    # Méthode combinée pour évaluer à la fois l'entropie et la force du mot de passe
+    def evaluer(self):
+        entropie = self.calculer_entropie()
+        force = self.evaluer_force()
+        return entropie, force

@@ -1,6 +1,6 @@
-import testeur_mdp
 import generateur_mdp
 import generateur_phrase
+import testeur_mdp
 
 def main():
     while True:
@@ -13,77 +13,67 @@ def main():
 
         if choix == "1":
             mdp = input("\nEntrez le mot de passe à tester: ")
-            entropie, force = testeur_mdp.evaluer_mdp(mdp)
-            print(f"Entropie du mot de passe: {entropie:.2f}")  # Affiche l'entropie avec 2 chiffres derrière la virgule
+            testeur = testeur_mdp.TesteurMDP(mdp)
+            entropie, force = testeur.evaluer()
+            print(f"Entropie du mot de passe: {entropie:.2f}")
             print(f"Force du mot de passe: {force}")
 
-
         elif choix == "2":
-
             while True:
-
                 try:
-
                     minuscules = int(input("Nombre de minuscules: "))
-
+                    if minuscules < 0:
+                        raise ValueError("Le nombre ne peut pas être négatif!")
                     break
-
-                except ValueError:
-
-                    print("Veuillez entrer un nombre valide pour les minuscules!")
+                except ValueError as e:
+                    print(f"Erreur : Veuillez rentrer un nombre")
 
             while True:
-
                 try:
-
                     majuscules = int(input("Nombre de majuscules: "))
-
+                    if majuscules < 0:
+                        raise ValueError("Le nombre ne peut pas être négatif!")
                     break
-
-                except ValueError:
-
-                    print("Veuillez entrer un nombre valide pour les majuscules!")
+                except ValueError as e:
+                    print(f"Erreur : Veuillez rentrer un nombre")
 
             while True:
-
                 try:
-
                     chiffres = int(input("Nombre de chiffres: "))
-
+                    if chiffres < 0:
+                        raise ValueError("Le nombre ne peut pas être négatif!")
                     break
-
-                except ValueError:
-
-                    print("Veuillez entrer un nombre valide pour les chiffres!")
+                except ValueError as e:
+                    print(f"Erreur : Veuillez rentrer un nombre")
 
             while True:
-
                 try:
-
                     speciaux = int(input("Nombre de caractères spéciaux: "))
-
+                    if speciaux < 0:
+                        raise ValueError("Le nombre ne peut pas être négatif!")
                     break
+                except ValueError as e:
+                    print(f"Erreur : Veuillez rentrer un nombre")
 
-                except ValueError:
-
-                    print("Veuillez entrer un nombre valide pour les caractères spéciaux!")
-
-            mdp = generateur_mdp.generer_mdp(minuscules, majuscules, chiffres, speciaux)
+            generateur = generateur_mdp.GenerateurMDP(minuscules, majuscules, chiffres, speciaux)
+            mdp = generateur.generer()
 
             print(f"Mot de passe généré: {mdp}")
 
-            entropie, force = testeur_mdp.evaluer_mdp(mdp)
-
-            print(f"Entropie du mot de passe: {entropie:.2f}")  # Affiche l'entropie avec 2 chiffres derrière la virgule
-
+            testeur = testeur_mdp.TesteurMDP(mdp)
+            entropie, force = testeur.evaluer()
+            print(f"Entropie du mot de passe: {entropie:.2f}")
             print(f"Force du mot de passe: {force}")
 
-
         elif choix == "3":
-            phrase = generateur_phrase.generer_phrase()
+            generateur = generateur_phrase.GenerateurPhrase()
+            phrase = generateur.generer()
+
             print(f"Passphrase générée: {phrase}")
-            entropie, force = testeur_mdp.evaluer_mdp(phrase)
-            print(f"Entropie du mot de passe: {entropie:.2f}")  # Affiche l'entropie avec 2 chiffres derrière la virgule
+
+            testeur = testeur_mdp.TesteurMDP(phrase)
+            entropie, force = testeur.evaluer()
+            print(f"Entropie du mot de passe: {entropie:.2f}")
             print(f"Force du mot de passe: {force}")
 
         elif choix == "4":
