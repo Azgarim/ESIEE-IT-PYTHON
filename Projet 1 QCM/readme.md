@@ -26,4 +26,6 @@ Pour exécuter les tests unitaires, naviguez vers le dossier du projet et exécu
 
 ---
 
-Antoine NOURY
+Antoine NOURY (antoine.noury@edu.esiee-it.fr
+
+(Le dernier commit de dimanche est juste la dernière ligne à la fin du main (voir historique de commit) afin que le programme ne se ferme pas tout seul à la fin si cela pose un problème en termes de notabilité je peux la supprimer/commenter n'hésitez pas à me contacter)
