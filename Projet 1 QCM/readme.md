@@ -16,7 +16,7 @@ Ce projet est un quiz de culture générale simple écrit en Python. Les utilisa
 
 1. Clonez ce dépôt git.
 2. Exécutez `main.py` pour lancer l'application.
-3. Suivez les instructions à l'écran pour générer ou tester un mot de passe.
+3. Remplissez votre qcm
 
 ## Tests
 
