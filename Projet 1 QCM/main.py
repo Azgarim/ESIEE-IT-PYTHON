@@ -120,3 +120,5 @@ questions_melangees = random.sample(questions, 10)
 # Création du quiz et démarrage du quiz
 quiz = Quiz(questions_melangees)
 quiz.commencer()
+
+input("Appuyez sur Entrée pour quitter...")
